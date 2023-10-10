@@ -1,0 +1,197 @@
+/*FONTS*/
+@font-face {
+  font-family: 'Sora Variable';
+  src:
+    local('Sora Variable'),
+    url(../../Fonts/Sora/Sora-VariableFont_wght.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'General Sans Variable';
+  src:
+    local('General Sans Variable'),
+    url(../../Fonts/GeneralSans/GeneralSans-Variable.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'General Sans Variable Italic';
+  src:
+    local('General Sans Variable Italic'),
+    url(../../Fonts/GeneralSans/GeneralSans-VariableItalic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open sans';
+  src:
+    local('General Sans'),
+    url(../../Fonts/OpenSans/OpenSans-VariableFont_wdth\wght.ttf) format('truetype');
+}
+
+/*VARIABLES*/
+body {
+  --positive-color: #008000 !important;
+  --positive-highlight-color: #006600 !important;
+  --negetive-color: #b20000 !important;
+  --negetive-hightlight-color: #ff0000 !important;
+  --highlight-yellow: #f7e011 !important;
+  --highlight-light-yellow: #fcf4a9 !important;
+  --highlight-purple: #772bed !important;
+}
+
+body.dark-theme {
+  --font-color: #fff !important;
+  --background-color-secondary: #000 !important;
+  --background-color: #16161c !important;
+  --fill-color: #393948 !important;
+  --lock-color: #8b0000 !important;
+}
+body.light-theme {
+  --font-color: #000 !important;
+  --background-color-secondary: #1e5b6c !important;
+  --background-color: #d2cfcf !important;
+  --fill-color: white !important;
+  --lock-color: #ff1414;
+}
+
+/*CSS RESET*/
+body {
+  background-color: var(--background-color);
+  margin: 0;
+  overflow: auto;
+  font-family: 'General Sans Variable';
+}
+
+/*COMMON ANT STYLES*/
+
+/* default animation of ant=d buttons */
+.ant-btn:focus,
+.ant-btn.focus {
+  border: var(--background-color) !important;
+}
+
+/*radio*/
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  color: var(--positive-color) !important;
+}
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+  background-color: var(--highlight-yellow) !important;
+}
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  border-color: var(--highlight-yellow) !important;
+}
+.ant-radio-button-wrapper:hover {
+  color: var(--positive-highlight-color) !important;
+}
+
+/* inputs */
+.ant-input {
+  color: var(--font-color) !important;
+}
+.ant-input[disabled] {
+  color: var(--font-color) !important;
+  background-color: var(--fill-color);
+}
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+  border: 1px solid var(--highlight-yellow);
+}
+.ant-input-affix-wrapper-focused {
+  border: 1px solid var(--highlight-yellow) !important;
+  box-shadow: 0 0 0 1px var(--highlight-light-yellow);
+}
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background-color: var(--fill-color);
+}
+
+/* dropdown */
+.ant-select-dropdown {
+  border: 1px dashed var(--font-color) !important;
+  border-radius: 8px !important ;
+}
+.ant-dropdown {
+  border: 1px dashed var(--font-color) !important;
+  border-radius: 8px !important ;
+}
+.ant-select-dropdown .ant-select-item {
+  color: var(--font-color);
+}
+.ant-form-item .ant-form-item-label > label {
+  color: var(--font-color) !important;
+}
+
+/* select */
+.ant-select-single .ant-select-selector {
+  color: var(--font-color) !important;
+}
+
+/*suffix*/
+.ant-segmented .ant-segmented-item-selected {
+  background-color: var(--highlight-purple) !important;
+}
+
+/*date time pickers*/
+.ant-picker {
+  color: var(--font-color) !important;
+  background: var(--background-color-secondary) !important;
+}
+.ant-picker-focused {
+  border-color: var(--highlight-yellow) !important;
+}
+.ant-picker:hover {
+  border-color: initial !important;
+}
+.ant-picker-range .ant-picker-active-bar {
+  background: var(--highlight-light-yellow) !important;
+}
+.ant-picker .ant-picker-input > input::placeholder {
+  color: var(--font-color) !important;
+}
+.ant-picker .ant-picker-separator {
+  color: var(--font-color) !important;
+}
+.ant-picker .ant-picker-suffix {
+  color: var(--font-color) !important;
+}
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+  border: 1px solid var(--highlight-yellow) !important;
+}
+
+/* toast */
+.ant-message-notice-content {
+  background-color: var(--fill-color) !important;
+  box-shadow: rgb(119, 43, 237, 0.9) 0px 2px 8px 0px !important;
+}
+
+/* modal */
+.ant-modal-content {
+  background-color: var(--fill-color) !important;
+  border: 1px dashed var(--font-color) !important;
+}
+.ant-modal-confirm-title {
+  color: var(--font-color) !important;
+}
+.ant-modal-confirm-content {
+  color: var(--font-color) !important;
+}
+
+/*COMMON CLASSNAME STYLES*/
+.positive-action-button {
+  background-color: var(--positive-color) !important;
+  border: none !important;
+  color: var(--font-color) !important;
+  box-shadow: none !important;
+}
+.negative-action-button {
+  background-color: var(--negetive-hightlight-color) !important;
+  color: var(--font-color) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.positive-action-button:hover,
+.positive-action-button:focus {
+  background-color: var(--positive-highlight-color) !important;
+  color: var(--font-color) !important;
+  box-shadow: none !important;
+}
+.negative-action-button:hover,
+.negative-action-button:focus {
+  background-color: var(--negetive-color) !important;
+  color: var(--font-color) !important;
+  box-shadow: none !important;
+}

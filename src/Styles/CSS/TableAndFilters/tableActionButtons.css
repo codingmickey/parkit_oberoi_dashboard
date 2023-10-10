@@ -1,0 +1,30 @@
+/* ACTION ICONS IN COLUMN*/
+.action-button {
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.action-button.delete {
+  color: var(--negetive-hightlight-color) !important;
+}
+
+.action-button.edit {
+  color: #e19b12 !important;
+}
+
+.action-button:hover {
+  animation: scale-animation 0.3s infinite alternate;
+}
+
+@keyframes scale-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}

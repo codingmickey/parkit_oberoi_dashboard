@@ -1,0 +1,41 @@
+/*INPUT */
+.float-label {
+  position: relative;
+}
+
+span.ant-input-affix-wrapper {
+  position: relative;
+}
+
+.text-danger {
+  color: #ff0000;
+}
+
+.label {
+  position: absolute;
+  pointer-events: none;
+  left: 15px;
+  top: 11px;
+  transition: all 0.3s ease-out;
+}
+
+.float-label > span {
+  border: 1px solid #f7e011 !important;
+  border-radius: 6px;
+  background-color: var(--fill-color);
+}
+
+.as-label {
+  font-weight: bold;
+  z-index: 100;
+  top: -8px;
+  font-size: 12px !important;
+  padding: 0 4px;
+  margin-left: -4px;
+  user-select: none;
+}
+
+.ant-input {
+  background-color: var(--fill-color);
+  padding: 11px 12px 4px 11px;
+}

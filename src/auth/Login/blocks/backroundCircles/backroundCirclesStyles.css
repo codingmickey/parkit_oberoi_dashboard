@@ -1,0 +1,11 @@
+.circle {
+  border-radius: 100%;
+  background-color: var(--highlight-yellow);
+}
+
+/* Media query for small screens */
+@media (max-width: 767px) {
+  .circle {
+    display: none;
+  }
+}
