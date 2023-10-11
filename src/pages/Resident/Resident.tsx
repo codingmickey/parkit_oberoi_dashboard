@@ -5,8 +5,8 @@ import { useLocation } from 'react-router-dom';
 //Page specific
 import { Box, FilterBoxComponent, TableBoxComponent } from '../../Components/Box';
 import LogsFilter from './FilterHeader/LogsFilter';
-import LogsTable from './Table/Table';
-import { FilterProps, LogRecord } from './models';
+import ResidentTable from './Table/Table';
+import { FilterProps, ResidentRecord } from './models';
 
 export default function Resident() {
   const location = useLocation();
@@ -21,7 +21,7 @@ export default function Resident() {
   const [reloadTrigger, setReloadTrigger] = useState(0);
   const [reloadingCurrentlyOrNot, setReloadingCurrentlyOrNot] = useState(true);
   const [together, setTogether] = useState(0);
-  const [data, setData] = useState<LogRecord[]>([]);
+  const [data, setData] = useState<ResidentRecord[]>([]);
 
   return (
     <>
@@ -39,7 +39,7 @@ export default function Resident() {
           />
         </FilterBoxComponent>
         <TableBoxComponent>
-          <LogsTable
+          <ResidentTable
             data={data}
             setData={setData}
             together={together}
