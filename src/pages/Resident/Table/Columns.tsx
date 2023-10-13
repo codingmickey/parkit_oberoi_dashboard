@@ -6,7 +6,9 @@ import {
   ReadableEventInTimestampProps,
   ParkingSpot,
   WhitelistReference,
-  paymentTypesForToll
+  paymentTypesForToll,
+  ResidentialAllocatedParkings,
+  ResidentialRegisteredVehicles
 } from '../models';
 import type { ColumnsType } from 'antd/es/table';
 import { Image } from 'antd';
@@ -50,8 +52,8 @@ export default function TableColumns({ width }: tableColumnProps) {
     },
     {
       title: 'Resident Name',
-      dataIndex: 'residentName',
-      key: 'residentName',
+      dataIndex: 'name',
+      key: 'name',
       width: 151,
       // fixed: width > 550 ? 'left' : undefined,
       ellipsis: true
@@ -67,84 +69,138 @@ export default function TableColumns({ width }: tableColumnProps) {
       width: width <= 992 ? 70 : 80
     },
     {
-      title: 'Vehicle Number',
-      dataIndex: 'vehicleNumber',
-      key: 'vehicleNumber',
+      title: 'Flat',
+      dataIndex: 'flatNumber',
+      key: 'flatNumber',
+      // fixed: width > 550 ? 'left' : undefined,
+      // sorter: (a: LogRecord, b: LogRecord) => a.id - b.id,
+      ellipsis: true,
+      width: width <= 992 ? 70 : 80
+    },
+    {
+      title: 'Mobile Number',
+      dataIndex: 'mobileNumber',
+      key: 'mobileNumber',
       width: 130,
       ellipsis: true
     },
     {
-      title: 'Vehicle Type',
-      dataIndex: 'vehicleType',
-      key: 'vehicleType',
+      title: 'ALlocated Spaces(ID,Parking Area x Count)',
+      dataIndex: 'residentialAllocatedParkings',
+      key: 'residentialAllocatedParkings',
       width: 130,
-      ellipsis: true
+      ellipsis: true,
+      render: (residentialAllocatedParkings: ResidentialAllocatedParkings[]) => {
+        return (
+          <>
+            {residentialAllocatedParkings.map((allocatedParking) => (
+              <li>
+                {allocatedParking.id}
+                {allocatedParking.parkingArea ? `,${allocatedParking.parkingArea}` : ``} x {allocatedParking.count}
+              </li>
+            ))}
+          </>
+        );
+      }
     },
     {
-      title: 'Check In',
-      key: 'checkInTimeStamp',
-      children: [
-        {
-          title: 'Date',
-          dataIndex: 'redableEventInTimestamp',
-          render: (redableEventInTimestamp: ReadableEventInTimestampProps) => {
-            return redableEventInTimestamp.date;
-          },
-          ellipsis: true,
-          width: 110
-        },
-        {
-          title: 'Time',
-          dataIndex: 'redableEventInTimestamp',
-          render: (redableEventInTimestamp: ReadableEventInTimestampProps) => redableEventInTimestamp.time,
-          ellipsis: true,
-          width: 100
-        },
-        {
-          title: 'Gate',
-          dataIndex: 'checkInGate',
-          key: 'checkInGate',
-          width: 100,
-          ellipsis: true
-        }
-      ]
-    },
-    {
-      title: 'Check Out',
-      key: 'checkOutTimeStamp',
-      children: [
-        {
-          title: 'Date',
-          dataIndex: 'redableEventInTimestamp',
-          render: (redableEventInTimestamp: ReadableEventInTimestampProps) => {
-            return redableEventInTimestamp.date;
-          },
-          ellipsis: true,
-          width: 110
-        },
-        {
-          title: 'Time',
-          dataIndex: 'redableEventInTimestamp',
-          render: (redableEventInTimestamp: ReadableEventInTimestampProps) => redableEventInTimestamp.time,
-          ellipsis: true,
-          width: 100
-        },
-        {
-          title: 'Gate',
-          dataIndex: 'checkOutGate',
-          key: 'checkOutGate',
-          width: 100,
-          ellipsis: true
-        }
-      ]
-    },
-    {
-      title: 'Duration',
-      dataIndex: 'duration',
-      key: 'duration',
+      title: 'Vehicle Numbers(No. x Type)',
+      dataIndex: 'residentialRegisteredVehicles',
+      key: 'residentialRegisteredVehicles',
       width: 130,
-      ellipsis: true
+      ellipsis: true,
+      render: (residentialRegisteredVehicles: ResidentialRegisteredVehicles[]) => {
+        return (
+          <>
+            {residentialRegisteredVehicles.map((registeredVehicle) => (
+              <li>
+                {registeredVehicle.vehicleRegistration}: {registeredVehicle.vehicleType.vehicleTypeName}
+              </li>
+            ))}
+          </>
+        );
+      }
     }
+
+    // {
+    //   title: 'Vehicle Number',
+    //   dataIndex: 'vehicleNumber',
+    //   key: 'vehicleNumber',
+    //   width: 130,
+    //   ellipsis: true
+    // },
+    // {
+    //   title: 'Vehicle Type',
+    //   dataIndex: 'vehicleType',
+    //   key: 'vehicleType',
+    //   width: 130,
+    //   ellipsis: true
+    // },
+    // {
+    //   title: 'Check In',
+    //   key: 'checkInTimeStamp',
+    //   children: [
+    //     {
+    //       title: 'Date',
+    //       dataIndex: 'redableEventInTimestamp',
+    //       render: (redableEventInTimestamp: ReadableEventInTimestampProps) => {
+    //         return redableEventInTimestamp.date;
+    //       },
+    //       ellipsis: true,
+    //       width: 110
+    //     },
+    //     {
+    //       title: 'Time',
+    //       dataIndex: 'redableEventInTimestamp',
+    //       render: (redableEventInTimestamp: ReadableEventInTimestampProps) => redableEventInTimestamp.time,
+    //       ellipsis: true,
+    //       width: 100
+    //     },
+    //     {
+    //       title: 'Gate',
+    //       dataIndex: 'checkInGate',
+    //       key: 'checkInGate',
+    //       width: 100,
+    //       ellipsis: true
+    //     }
+    //   ]
+    // },
+    // {
+    //   title: 'Check Out',
+    //   key: 'checkOutTimeStamp',
+    //   children: [
+    //     {
+    //       title: 'Date',
+    //       dataIndex: 'redableEventInTimestamp',
+    //       render: (redableEventInTimestamp: ReadableEventInTimestampProps) => {
+    //         return redableEventInTimestamp.date;
+    //       },
+    //       ellipsis: true,
+    //       width: 110
+    //     },
+    //     {
+    //       title: 'Time',
+    //       dataIndex: 'redableEventInTimestamp',
+    //       render: (redableEventInTimestamp: ReadableEventInTimestampProps) => redableEventInTimestamp.time,
+    //       ellipsis: true,
+    //       width: 100
+    //     },
+    //     {
+    //       title: 'Gate',
+    //       dataIndex: 'checkOutGate',
+    //       key: 'checkOutGate',
+    //       width: 100,
+    //       ellipsis: true
+    //     }
+    //   ]
+    // },
+    // {
+    //   title: 'Duration',
+    //   dataIndex: 'duration',
+    //   key: 'duration',
+    //   width: 130,
+    //   ellipsis: true
+    // }
     // {
     //   title: 'Amount Collected',
     //   dataIndex: 'amountCollected',
