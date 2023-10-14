@@ -7,9 +7,8 @@ import RequireAuth from './auth/RequireAuth';
 
 //Pages
 import MonthlyPass from './pages/MonthlyPass';
-import Users from './pages/Users';
 import LoginPage from './auth/Login/LoginPage';
-import UserLogs from './pages/UserLogs';
+// import UserLogs from './pages/UserLogs';
 import Pricing from './pages/Pricing';
 import VehicleTypes from './pages/VehicleType';
 import ErrorPage from './ErrorBoundary/ErrorPage';
@@ -22,6 +21,7 @@ import AddOperator from './pages/Users/Add';
 import ColorModeWrapper from './Layouts/ColorModeWrapper';
 import Resident from './pages/Resident';
 import RegisteredVehicles from './pages/RegisteredVehicle/List';
+import Residents from './pages/Users/List';
 
 const routes = (
   <Route path="/" element={<PersistAuth />}>
@@ -31,16 +31,18 @@ const routes = (
       </Route>
       <Route element={<RequireAuth />}>
         <Route path="dashboard" element={<Dashboard />} />
+        {/* Not needed */}
         <Route path="dashboard/monthly-pass" element={<MonthlyPass />} />
-        <Route path="dashboard/operator" element={<Users />} />
-        <Route path="dashboard/operator/edit/:id" element={<EditOperator />} />
-        <Route path="dashboard/operator/add" element={<AddOperator />} />
-        <Route path="dashboard/operator-logs" element={<UserLogs />} />
+        {/* <Route path="dashboard/operator-logs" element={<UserLogs />} /> */}
         <Route path="dashboard/pricing" element={<Pricing />} />
         <Route path="dashboard/vehicle-types" element={<VehicleTypes />} />
         <Route path="dashboard/local-vehicle" element={<LocalVehicle />} />
         {/* Kaamke */}
         <Route path="dashboard/logs" element={<Logs />} />
+        <Route path="dashboard/operator" element={<Residents />} />
+        <Route path="dashboard/operator/edit/:id" element={<EditOperator />} />
+        <Route path="dashboard/operator/add" element={<AddOperator />} />
+
         <Route path="dashboard/resident-logs" element={<Resident />} />
         <Route path="dashboard/registered-vehicle" element={<RegisteredVehicles />} />
 
