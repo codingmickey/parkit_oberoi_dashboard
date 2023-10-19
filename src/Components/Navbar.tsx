@@ -24,12 +24,13 @@ const Navbar = ({ collapsed, setCollapsed }: buttonProps) => {
 
   const handleLogoutClick = async () => {
     try {
-      const options: AxiosRequestConfig = {
-        url: 'toll/logout',
-        method: 'POST'
-      };
-      await axiosPrivateInstance(options);
-      setAuth({});
+      // const options: AxiosRequestConfig = {
+      //   url: 'toll/logout',
+      //   method: 'POST'
+      // };
+      // await axiosPrivateInstance(options);
+      localStorage.removeItem('token');
+      setAuth({ auth_token: '', id: 0, emailId: '' });
       navigate('/');
     } catch (err) {
       console.log(err);
