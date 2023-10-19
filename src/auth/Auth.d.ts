@@ -1,7 +1,8 @@
 type Auth = {
-  mobileNumber: string;
-  token: string;
+  emailId: string;
+  auth_token: string;
   id: number;
+  fullName?: string;
   // parkingManager: {
   //   id: number;
   //   name: string;

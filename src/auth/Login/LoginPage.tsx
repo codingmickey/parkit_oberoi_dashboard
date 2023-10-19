@@ -20,7 +20,7 @@ import useAuth from '../../Hooks/useAuth';
 import ThemeSwitchButton from '../../Components/ThemeSwitchButton';
 
 interface FormData {
-  phone: string;
+  email: string;
   password: string;
 }
 
@@ -29,12 +29,12 @@ interface LoginResponse {
 }
 
 export default function LoginPage() {
-  const inputRef = useRef();
+  // const inputRef = useRef();
   const { setAuth } = useAuth();
   const navigate = useNavigate();
 
   const [data, setData] = useState<FormData>({
-    phone: '',
+    email: '',
     password: ''
   });
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -64,7 +64,7 @@ export default function LoginPage() {
 
   const dealingWithLoginSubmission = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (!data.password || !data.phone) {
+    if (!data.password || !data.email) {
       message.error({
         content: 'Please enter complete details',
         duration: 3
@@ -76,18 +76,18 @@ export default function LoginPage() {
         method: 'POST',
         url: 'login',
         // TODO: Change this
-        data: { password: data.password, mobileNumber: data.phone }
+        data: { password: data.password, emailId: data.email }
       };
       const resp: LoginResponse = await axiosPrivateInstance(options);
       setLogddedInForLockAnimation(true);
       console.log(resp);
 
-      localStorage.setItem('token', resp.data.token);
+      localStorage.setItem('token', resp.data.auth_token);
 
       setAuth({
-        mobileNumber: resp.data.mobileNumber,
+        emailId: resp.data.emailId,
         id: resp.data.id,
-        token: resp.data.token
+        auth_token: resp.data.auth_token
       });
     } catch (err) {
       const error = err as AxiosError;
@@ -193,12 +193,12 @@ export default function LoginPage() {
               <div style={{ marginTop: '20px', marginBottom: '17px' }}>
                 <FloatInput
                   width="100%"
-                  label="Phone"
-                  value={data.phone}
-                  placeholder="Enter Phone..."
+                  label="Email"
+                  value={data.email}
+                  placeholder="Enter Email..."
                   required={true}
                   type={`${isPasswordVisible ? 'text' : 'password '}`}
-                  id="phone"
+                  id="email"
                   onChange={(e) => {
                     handleInputChange<FormData>(e, setData, false);
                   }}
