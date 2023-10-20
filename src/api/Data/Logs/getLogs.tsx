@@ -20,7 +20,7 @@ const getLog = async (
 ): Promise<responseType> => {
   try {
     const options: AxiosRequestConfig = {
-      url: `log?page_number=${pageNumber}&data_per_page=${pageSize}`,
+      url: `residential/log?parkingSpotTypeId=4&user=resident`,
       // &residentialId=${residentialId}
       // &residentialRegisteredVehicleId=${residentialRegisteredVehicleId}
       // &search=${search}

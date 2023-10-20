@@ -49,7 +49,7 @@ export default function TableColumns({ width }: tableColumnProps) {
       fixed: width > 550 ? 'left' : undefined,
       sorter: (a: LogRecord, b: LogRecord) => a.id - b.id,
       ellipsis: true,
-      width: width <= 992 ? 70 : 60
+      width: width <= 992 ? 80 : 70
     },
     {
       title: 'Vehicle Registration',
@@ -104,7 +104,7 @@ export default function TableColumns({ width }: tableColumnProps) {
             return redableEventInTimestamp.time;
           },
           ellipsis: true,
-          width: 85
+          width: 100
         },
         {
           title: 'Gate',
@@ -112,7 +112,7 @@ export default function TableColumns({ width }: tableColumnProps) {
           // render: (redableEventInTimestamp: CheckOutLogs) =>
           //   redableEventInTimestamp.length > 0 ? redableEventInTimestamp[0].checkOutGateNo : '-',
           ellipsis: true,
-          width: 50
+          width: 90
         }
       ]
     },
@@ -122,27 +122,26 @@ export default function TableColumns({ width }: tableColumnProps) {
       children: [
         {
           title: 'Date',
-          dataIndex: 'checkOutLogs',
-          render: (redableEventInTimestamp: CheckOutLogs) =>
-            redableEventInTimestamp.length > 0 ? redableEventInTimestamp[0].redableCheckOutTimestamp?.date : '-',
+          dataIndex: 'redableCheckOutTimestamp',
+          render: (redableEventInTimestamp: ReadableEventInTimestampProps) =>
+            redableEventInTimestamp ? redableEventInTimestamp.date : '-',
           ellipsis: true,
           width: 100
         },
         {
           title: 'Time',
-          dataIndex: 'checkOutLogs',
-          render: (redableEventInTimestamp: CheckOutLogs) =>
-            redableEventInTimestamp.length > 0 ? redableEventInTimestamp[0].redableCheckOutTimestamp?.time : '-',
+          dataIndex: 'redableCheckOutTimestamp',
+          render: (redableEventInTimestamp: ReadableEventInTimestampProps) =>
+            redableEventInTimestamp ? redableEventInTimestamp.time : '-',
           ellipsis: true,
-          width: 85
+          width: 100
         },
         {
           title: 'Gate',
-          dataIndex: 'checkOutLogs',
-          render: (redableEventInTimestamp: CheckOutLogs) =>
-            redableEventInTimestamp.length > 0 ? redableEventInTimestamp[0].checkOutGateNo : '-',
+          dataIndex: 'checkOutGateNo',
+          render: (checkOutGateNo?: string) => (checkOutGateNo ? checkOutGateNo : '-'),
           ellipsis: true,
-          width: 50
+          width: 80
         }
       ]
     },
