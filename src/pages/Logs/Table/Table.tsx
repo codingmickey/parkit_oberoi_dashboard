@@ -31,7 +31,7 @@ const LogsTable = ({
   const [search, setSearch] = useState<string | null>('');
   const [id, setId] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
-  const [totalRecords, setTotalRecords] = useState(0);
+  // const [totalRecords, setTotalRecords] = useState(0);
   const [messageApi, contextHolder] = message.useMessage();
   const { width, height } = useWindowDimensions();
 
@@ -50,7 +50,8 @@ const LogsTable = ({
           abortController
         );
         setData(data.rows);
-        if (!data.pagination.total_data_count) setTotalRecords(data.pagination.total_data_count);
+        console.log(data.pagination);
+        // if (!data.pagination.total_data_count) setTotalRecords(data.pagination.total_data_count);
       } catch (error) {
         const err = error as AxiosError;
         if (!err.response) {
@@ -77,7 +78,7 @@ const LogsTable = ({
       abortController.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reloadTrigger, pageSize, pageNumber, together]);
+  }, [reloadTrigger, together]);
 
   const columns = TableColumns({ width });
 
@@ -94,13 +95,16 @@ const LogsTable = ({
           y: HeightPropsForTable(height)
         }}
         loading={reloadingCurrentlyOrNot}
+        rowKey={(record) => record.id}
         pagination={{
-          total: totalRecords,
+          // total: totalRecords,
+          // showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
           defaultPageSize: pageSize,
           current: pageNumber,
           pageSize: pageSize,
-          onChange: (page: number) => {
+          onChange: (page: number, size: number) => {
             setPageNumber(page);
+            setPageSize(size);
           },
           showSizeChanger: true,
           showQuickJumper: width > 992 ? true : false,
