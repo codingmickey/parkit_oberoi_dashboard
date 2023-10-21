@@ -3,15 +3,15 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 //Page specific
-import UsersFilter from './FilterHeader/UsersFilter';
-import UsersTable from './Table/Table';
+import ResidentsFilter from './FilterHeader/UsersFilter';
+import ResidentsTable from './Table/Table';
 import { FilterProps, UserRecord } from '../models';
 
 //component|hooks|utils|styles
 import '../../../Styles/CSS/TableAndFilters/tableActionButtons.css';
 import { Box, FilterBoxComponent, TableBoxComponent } from '../../../Components/Box';
 
-export default function Users() {
+export default function Residents() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const initialState: FilterProps = {
@@ -31,7 +31,7 @@ export default function Users() {
     <>
       <Box collapsed={collapsed} setCollapsed={setCollapsed}>
         <FilterBoxComponent>
-          <UsersFilter
+          <ResidentsFilter
             data={data}
             setData={setData}
             together={together}
@@ -43,7 +43,7 @@ export default function Users() {
           />
         </FilterBoxComponent>
         <TableBoxComponent>
-          <UsersTable
+          <ResidentsTable
             data={data}
             setData={setData}
             together={together}

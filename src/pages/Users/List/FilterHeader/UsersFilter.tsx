@@ -51,7 +51,7 @@ const FloatingInputForFiltersComponent = ({
   );
 };
 
-export default function UsersFilter({
+export default function ResidentsFilter({
   setReloadTrigger,
   reloadingCurrentlyOrNot,
   filters,
