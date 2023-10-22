@@ -7,14 +7,14 @@ import { Table, message } from 'antd';
 import { TableProps } from '../models';
 import TableColumns from './Columns';
 import { AxiosError } from 'axios';
-import getLogs from '../../../api/Data/Logs/getLogs';
 
 //components|hooks|utils
 import RetryButtonForMessage from '../../../Components/RetryButtonForMessage';
 import useWindowDimensions from '../../../Hooks/windowDimension';
 import HeightPropsForTable from '../../../Styles/CSS/CommonProps/HeightPropsForTable';
+import getResident from '../../../api/Data/Resident/getResident';
 
-const LogsTable = ({
+const ResidentTable = ({
   reloadTrigger,
   setReloadTrigger,
   reloadingCurrentlyOrNot,
@@ -35,28 +35,29 @@ const LogsTable = ({
     const abortController = new AbortController();
     const fetchData = async () => {
       try {
-        const convertDateTimeFormat = (dateTimeString) => {
-          if (dateTimeString) {
-            const [datePart, timePart] = dateTimeString.split(' ');
-            const [day, month, year] = datePart.split('-');
-            return `${year}-${month}-${day} ${timePart && timePart}`;
-          } else {
-            return '';
-          }
-        };
-        const startDateConverted = convertDateTimeFormat(filters.startDate);
-        const endDateConverted = convertDateTimeFormat(filters.endDate);
+        // const convertDateTimeFormat = (dateTimeString) => {
+        //   if (dateTimeString) {
+        //     const [datePart, timePart] = dateTimeString.split(' ');
+        //     const [day, month, year] = datePart.split('-');
+        //     return `${year}-${month}-${day} ${timePart && timePart}`;
+        //   } else {
+        //     return '';
+        //   }
+        // };
+        // const startDateConverted = convertDateTimeFormat(filters.startDate);
+        // const endDateConverted = convertDateTimeFormat(filters.endDate);
         setReloadingCurrentlyOrNot(true);
-        const data = await getLogs(
+        const data = await getResident(
           pageNumber,
           pageSize,
-          together,
-          filters.vehicleRegistration,
-          [startDateConverted, endDateConverted],
+          // together,
+          // filters.vehicleRegistration,
+          // [startDateConverted, endDateConverted],
           abortController
         );
-        setData(data.rows);
-        setTotalRecords(data.pagination.total_data_count);
+        console.log(data);
+        setData(data.data);
+        setTotalRecords(data.total_data_count);
       } catch (error) {
         const err = error as AxiosError;
         if (!err.response) {
@@ -112,7 +113,7 @@ const LogsTable = ({
           pageSizeOptions: pageOptions,
           position: ['bottomRight'],
           onShowSizeChange: (current: number, size: number) => {
-            setPageSize(() => size);
+            setPageSize(size);
           }
         }}
       />
@@ -120,4 +121,4 @@ const LogsTable = ({
   );
 };
 
-export default LogsTable;
+export default ResidentTable;

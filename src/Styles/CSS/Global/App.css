@@ -1,27 +1,20 @@
 /*FONTS*/
 @font-face {
   font-family: 'Sora Variable';
-  src:
-    local('Sora Variable'),
-    url(../../Fonts/Sora/Sora-VariableFont_wght.ttf) format('truetype');
+  src: local('Sora Variable'), url(../../Fonts/Sora/Sora-VariableFont_wght.ttf) format('truetype');
 }
 @font-face {
   font-family: 'General Sans Variable';
-  src:
-    local('General Sans Variable'),
-    url(../../Fonts/GeneralSans/GeneralSans-Variable.ttf) format('truetype');
+  src: local('General Sans Variable'), url(../../Fonts/GeneralSans/GeneralSans-Variable.ttf) format('truetype');
 }
 @font-face {
   font-family: 'General Sans Variable Italic';
-  src:
-    local('General Sans Variable Italic'),
+  src: local('General Sans Variable Italic'),
     url(../../Fonts/GeneralSans/GeneralSans-VariableItalic.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open sans';
-  src:
-    local('General Sans'),
-    url(../../Fonts/OpenSans/OpenSans-VariableFont_wdth\wght.ttf) format('truetype');
+  src: local('General Sans'), url(../../Fonts/OpenSans/OpenSans-VariableFont_wdth\wght.ttf) format('truetype');
 }
 
 /*VARIABLES*/
@@ -43,8 +36,8 @@ body.dark-theme {
   --lock-color: #8b0000 !important;
 }
 body.light-theme {
-  --font-color: #000 !important;
-  --background-color-secondary: #1e5b6c !important;
+  --font-color: #333533 !important;
+  --background-color-secondary: #4281a4 !important;
   --background-color: #d2cfcf !important;
   --fill-color: white !important;
   --lock-color: #ff1414;

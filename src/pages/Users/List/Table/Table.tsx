@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 // import { Scrollbar } from "react-scrollbars-custom";
 
 //Page Specific
-import { UserRecord, TableProps } from '../../models';
+import { UserRecord, TableProps, ResidentRecord } from '../../models';
 import userTableColumns from './columns';
 import { AxiosError } from 'axios';
 import getUserData from '../../../../api/Data/Users/getusers';
@@ -16,8 +16,9 @@ import deleteUserData from '../../../../api/Data/Users/deleteUser';
 import RetryButtonForMessage from '../../../../Components/RetryButtonForMessage';
 import useWindowDimensions from '../../../../Hooks/windowDimension';
 import HeightPropsForTable from '../../../../Styles/CSS/CommonProps/HeightPropsForTable';
+import getResidents from '../../../../api/Data/Resident/getResident';
 
-const UsersTable = ({
+const ResidentsTable = ({
   reloadTrigger,
   setReloadTrigger,
   reloadingCurrentlyOrNot,
@@ -34,7 +35,7 @@ const UsersTable = ({
   const [totalRecords, setTotalRecords] = useState(0);
   const [messageApi, contextHolder] = message.useMessage();
   const { width, height } = useWindowDimensions();
-  let currentDataTemporarilyStored: UserRecord[]; //used for optimistic updated in delete
+  let currentDataTemporarilyStored: ResidentRecord[]; //used for optimistic updated in delete
 
   const expandSearchParamsForAPICall = () => {
     const searchParams = Object.values(filters).join(' ').trim();
@@ -46,10 +47,11 @@ const UsersTable = ({
     const fetchData = async () => {
       try {
         setReloadingCurrentlyOrNot(true);
-        const search = expandSearchParamsForAPICall();
-        const data = await getUserData(pageNumber, pageSize, together, search, abortController);
+        // const search = expandSearchParamsForAPICall();
+        const data = await getResidents(pageNumber, pageSize, abortController);
+        // (pageNumber, pageSize, together, search, abortController);
         setData(data.data);
-        setTotalRecords(data.pagination.total_data_count);
+        setTotalRecords(data.total_data_count);
       } catch (error) {
         const err = error as AxiosError;
         if (!err.response) {
@@ -188,4 +190,4 @@ const UsersTable = ({
   );
 };
 
-export default UsersTable;
+export default ResidentsTable;
