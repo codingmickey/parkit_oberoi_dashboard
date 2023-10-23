@@ -6,25 +6,31 @@ import { AxiosError } from 'axios';
 
 //Page specific
 import AccountForm from '../Components/AccountForm';
-import { UserRecord } from '../models';
+import { ResidentAddFormProps, ResidentRecord } from '../models';
 import createUser from '../../../api/Data/Users/createUser';
 
 //components|hooks|utils
 import RetryButtonForMessage from '../../../Components/RetryButtonForMessage';
 
 export default function AddOperator() {
-  const initialState: UserRecord = {
-    id: 0,
-    name: '',
-    mobileNumber: '',
-    shiftStartTime: '',
-    shiftEndTime: '',
-    gender: null,
-    email: null,
-    readableDOB: null,
-    DOB: undefined
+  const initialState: ResidentAddFormProps = {
+    // id: 0,
+    // name: '',
+    // mobileNumber: '',
+    // shiftStartTime: '',
+    // shiftEndTime: '',
+    // gender: null,
+    // email: null,
+    // readableDOB: null,
+    // DOB: undefined,
+    firstName: '',
+    lastName: '',
+    wing: '',
+    flatNumber: 0,
+    vehicleRegistration: [''],
+    allocatedSpaces: 0
   };
-  const [operatorData, setOperatorData] = useState<UserRecord>(initialState);
+  const [operatorData, setOperatorData] = useState<ResidentAddFormProps>(initialState);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const handleRestore = () => {
@@ -67,10 +73,11 @@ export default function AddOperator() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
-        backgroundColor: `var(--font-color)`,
+        // height: '100vh',
+        backgroundColor: `var(--background-color)`,
         position: 'relative',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        padding: '0.5rem 1rem'
       }}
     >
       <AccountForm

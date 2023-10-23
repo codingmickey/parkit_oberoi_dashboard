@@ -7,7 +7,14 @@ import Title from 'antd/es/typography/Title';
 import { useNavigate } from 'react-router-dom';
 
 //Page specific
-import { AccountFormProps, UserRecord, genderLiteral, InputPropsForModal, genderOptionsArray } from '../models';
+import {
+  AccountFormProps,
+  UserRecord,
+  genderLiteral,
+  InputPropsForModal,
+  genderOptionsArray,
+  ResidentAddFormProps
+} from '../models';
 import './AccountFormStyles.css';
 
 //components|hooks|utils
@@ -31,7 +38,7 @@ const InputWithOnChange = ({
         name={`${type}`}
         placeholder={`${placeholder}`}
         value={`${currentData[type]}`}
-        onChange={(e) => handleInputChange<UserRecord>(e, setCurrentData, true, setErrors)}
+        onChange={(e) => handleInputChange<ResidentAddFormProps>(e, setCurrentData, true, setErrors)}
       />
     </>
   );
@@ -41,9 +48,11 @@ const AccountForm = (props: AccountFormProps) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const { operatorData, formType, setOperatorData, handleRestore, initialState } = props;
-  const updatedCurrentData = convertInObjectNullToString<UserRecord>(operatorData);
+  const updatedCurrentData = convertInObjectNullToString<ResidentAddFormProps>(operatorData);
   setOperatorData(updatedCurrentData);
-  const [errors, setErrors] = useState<UserRecord>(getDynamicInitialState<UserRecord>(operatorData));
+  const [errors, setErrors] = useState<ResidentAddFormProps>(
+    getDynamicInitialState<ResidentAddFormProps>(operatorData)
+  );
 
   const genderOptions = genderOptionsArray.map((gender) => {
     return { label: gender };
@@ -79,6 +88,13 @@ const AccountForm = (props: AccountFormProps) => {
     }));
   };
 
+  const handleAddVehicle = () => {
+    setOperatorData((prevData) => ({
+      ...prevData,
+      vehicleRegistration: [...prevData.vehicleRegistration, '']
+    }));
+  };
+
   return (
     <>
       <div style={{ display: 'flex' }}>
@@ -103,7 +119,9 @@ const AccountForm = (props: AccountFormProps) => {
         style={{
           backgroundColor: 'var(--background-color-secondary)',
           borderRadius: '20px',
-          padding: '20px'
+          padding: '20px',
+          minWidth: '50%',
+          maxWidth: '75%'
         }}
       >
         <Form form={form} onFinish={handleSubmit} initialValues={initialState}>
@@ -123,15 +141,30 @@ const AccountForm = (props: AccountFormProps) => {
             )}
             <Col xs={24} sm={operatorData.id !== 0 ? 15 : 24}>
               <Form.Item
-                name="name"
-                label="Name"
-                id="name"
-                rules={[{ required: true, message: 'Please enter the name' }]}
-                validateStatus={errors.name ? 'error' : ''}
-                help={errors.name}
+                name="firstName"
+                label="First Name"
+                id="fName"
+                rules={[{ required: true, message: 'Please enter the First Name' }]}
+                validateStatus={errors.firstName ? 'error' : ''}
+                help={errors.firstName}
               >
                 <InputWithOnChange
-                  type={'name'}
+                  type={'firstName'}
+                  setCurrentData={setOperatorData}
+                  currentData={operatorData}
+                  setErrors={setErrors}
+                />
+              </Form.Item>
+              <Form.Item
+                name="lastName"
+                label="Last Name"
+                id="lName"
+                rules={[{ message: 'Please enter the Last Name' }]}
+                validateStatus={errors.lastName ? 'error' : ''}
+                help={errors.lastName}
+              >
+                <InputWithOnChange
+                  type={'lastName'}
                   setCurrentData={setOperatorData}
                   currentData={operatorData}
                   setErrors={setErrors}
@@ -141,26 +174,17 @@ const AccountForm = (props: AccountFormProps) => {
           </Row>
 
           <Row gutter={16}>
-            <Col xs={20} sm={9}>
-              <Form.Item name="gender" label="Gender" fieldId="gender" id="gender">
-                <Select
-                  style={{
-                    width: '100%',
-                    color: `var(--font-color)`
-                  }}
-                  id="gender"
-                  size="large"
-                  placeholder="Gender"
-                  value={operatorData.gender}
-                  options={genderOptions}
-                  onChange={(value) => value && handleGenderChange(value)}
-                ></Select>
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={15} style={{ paddingLeft: '18px' }}>
-              <Form.Item name="email" label="Email" validateStatus={errors.email ? 'error' : ''} help={errors.email}>
+            <Col xs={24} sm={9}>
+              <Form.Item
+                name="wing"
+                label="Wing"
+                id="wing"
+                rules={[{ required: true, message: 'Please enter the wing' }]}
+                validateStatus={errors.wing ? 'error' : ''}
+                help={errors.wing}
+              >
                 <InputWithOnChange
-                  type="email"
+                  type={'wing'}
                   setCurrentData={setOperatorData}
                   currentData={operatorData}
                   setErrors={setErrors}
@@ -170,32 +194,17 @@ const AccountForm = (props: AccountFormProps) => {
           </Row>
 
           <Row gutter={16}>
-            <Col xs={20} sm={9}>
-              <Form.Item name="Date of Birth" label="DOB" id="DOB" fieldId="DOB">
-                <DatePicker
-                  format="DD-MM-YYYY"
-                  placeholder="dd-mm-yyyy"
-                  id="DOB"
-                  name="DOB"
-                  defaultValue={initialState.DOB}
-                  placement="bottomRight"
-                  size="middle"
-                  onChange={handleDateOfBirthChange}
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={15}>
+            <Col xs={24} sm={9}>
               <Form.Item
-                name="mobileNumber"
-                id="mobileNumber"
-                label="Mobile Number"
-                rules={[{ required: true, message: 'Please enter the mobile number' }]}
-                validateStatus={errors.mobileNumber ? 'error' : ''}
-                help={errors.mobileNumber}
+                name="flatNumber"
+                label="Flat Number"
+                id="flatNumber"
+                rules={[{ required: true, message: 'Please enter the flat number' }]}
+                validateStatus={errors.flatNumber ? 'error' : ''}
+                help={errors.flatNumber}
               >
                 <InputWithOnChange
-                  type="mobileNumber"
-                  placeholder="Mobile Number"
+                  type={'flatNumber'}
                   setCurrentData={setOperatorData}
                   currentData={operatorData}
                   setErrors={setErrors}
@@ -203,27 +212,46 @@ const AccountForm = (props: AccountFormProps) => {
               </Form.Item>
             </Col>
           </Row>
+
           <Row gutter={16}>
-            <Col>
+            <Col xs={24} sm={9}>
               <Form.Item
-                id="shiftTimeRange"
-                name="ShiftTimeRange"
-                label="Shift Time Range"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please enter the shift time range'
-                  }
-                ]}
+                name="allocatedSpaces"
+                label="Allocated Spaces"
+                id="allocatedSpaces"
+                rules={[{ required: true, message: 'Please enter the allocated spaces' }]}
+                validateStatus={errors.allocatedSpaces ? 'error' : ''}
+                help={errors.allocatedSpaces}
               >
-                <TimePicker.RangePicker
-                  format="HH:mm:ss"
-                  placeholder={['Shift Start Time', 'Shift End Time']}
-                  onChange={(values, formatString) => handleTimeRangeChange(formatString)}
-                  defaultValue={[initialState.shiftStartTime, initialState.shiftEndTime]}
+                <InputWithOnChange
+                  type={'allocatedSpaces'}
+                  setCurrentData={setOperatorData}
+                  currentData={operatorData}
+                  setErrors={setErrors}
                 />
               </Form.Item>
             </Col>
+          </Row>
+
+          <Row gutter={16}>
+            {operatorData.vehicleRegistration.map((vehicle, index) => (
+              <Col>
+                <div key={index}>
+                  <Form.Item
+                    name={['vehicles', index]}
+                    label={`Vehicle ${index + 1}`}
+                    rules={[{ required: true, message: 'Please input the vehicle registration number!' }]}
+                  >
+                    <Input placeholder="Enter registration number" />
+                  </Form.Item>
+                </div>
+              </Col>
+            ))}
+            <Form.Item>
+              <Button type="dashed" onClick={handleAddVehicle} style={{ width: '100%' }}>
+                + Add Vehicle
+              </Button>
+            </Form.Item>
           </Row>
           <Row>
             <div
