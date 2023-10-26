@@ -17,11 +17,12 @@ import Logs from './pages/Logs';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Report from './pages/Report/Report';
 import EditOperator from './pages/Users/Edit';
-import AddOperator from './pages/Users/Add';
+import AddResident from './pages/Resident/Add';
 import ColorModeWrapper from './Layouts/ColorModeWrapper';
 import Resident from './pages/Resident';
 import RegisteredVehicles from './pages/RegisteredVehicle/List';
 import Residents from './pages/Users/List';
+import AddRegisteredVehicle from './pages/RegisteredVehicle/Add';
 
 const routes = (
   <Route path="/" element={<PersistAuth />}>
@@ -39,12 +40,14 @@ const routes = (
         <Route path="dashboard/local-vehicle" element={<LocalVehicle />} />
         {/* Kaamke */}
         <Route path="dashboard/logs" element={<Logs />} />
-        <Route path="dashboard/operator" element={<Residents />} />
-        <Route path="dashboard/operator/edit/:id" element={<EditOperator />} />
-        <Route path="dashboard/operator/add" element={<AddOperator />} />
+        <Route path="dashboard/resident" element={<Residents />} />
+        {/* <Route path="dashboard/operator/edit/:id" element={<EditOperator />} /> */}
+        <Route path="dashboard/resident/add" element={<AddResident />} />
+        {/* <Route path="dashboard/resident/edit/:id" element={<Residents />} /> */}
+        {/* <Route path="dashboard/resident-logs" element={<Resident />} /> */}
 
-        <Route path="dashboard/resident-logs" element={<Resident />} />
         <Route path="dashboard/registered-vehicle" element={<RegisteredVehicles />} />
+        <Route path="dashboard/registered-vehicle/add" element={<AddRegisteredVehicle />} />
 
         <Route path="dashboard/report" element={<Report />} />
       </Route>
