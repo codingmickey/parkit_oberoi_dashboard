@@ -18,7 +18,7 @@ export default function ThemeSwitchButton() {
       options={[
         {
           value: 'light',
-          icon: <BsSun style={{ color: `var(--highlight-yellow)` }} />
+          icon: <BsSun style={{ color: `var(--font-color)` }} />
         },
         {
           value: 'dark',
