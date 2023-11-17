@@ -6,7 +6,7 @@ export interface ResidentRecord {
     | Date
     | boolean
     | undefined
-    | ResidentialRegisteredVehicles
+    | ResidentialRegisteredVehicles[]
     | ResidentialAllocatedParkings[]
     | ParkingSpot;
   // | ParkingSpot
@@ -127,3 +127,18 @@ export interface TableProps {
   setData: React.Dispatch<React.SetStateAction<ResidentRecord[]>>;
   together: number;
 }
+
+export interface UpdateResidentStatus {
+  id: number;
+  status: 'Approved';
+}
+
+export type ResidentAddFormProps = {
+  firstName: string;
+  lastName: string;
+  wing: string;
+  flatNumber: number;
+  vehicleRegistration: string[];
+  allocatedSpaces: number;
+  id?: number;
+};
